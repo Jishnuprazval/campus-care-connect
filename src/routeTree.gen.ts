@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedComplaintsIdRouteImport } from './routes/_authenticated/complaints.$id'
 import { Route as AuthenticatedComplaintsNewRouteImport } from './routes/_authenticated/complaints.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -34,6 +35,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedComplaintsIdRoute =
+  AuthenticatedComplaintsIdRouteImport.update({
+    id: '/complaints/$id',
+    path: '/complaints/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedComplaintsNewRoute =
   AuthenticatedComplaintsNewRouteImport.update({
     id: '/complaints/new',
@@ -45,12 +52,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/complaints/new': typeof AuthenticatedComplaintsNewRoute
 }
 export interface FileRoutesById {
@@ -59,19 +68,22 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/complaints/$id': typeof AuthenticatedComplaintsIdRoute
   '/_authenticated/complaints/new': typeof AuthenticatedComplaintsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/complaints/new'
+  fullPaths:
+    '/' | '/auth' | '/dashboard' | '/complaints/$id' | '/complaints/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/complaints/new'
+  to: '/' | '/auth' | '/dashboard' | '/complaints/$id' | '/complaints/new'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/complaints/$id'
     | '/_authenticated/complaints/new'
   fileRoutesById: FileRoutesById
 }
@@ -111,6 +123,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/complaints/$id': {
+      id: '/_authenticated/complaints/$id'
+      path: '/complaints/$id'
+      fullPath: '/complaints/$id'
+      preLoaderRoute: typeof AuthenticatedComplaintsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/complaints/new': {
       id: '/_authenticated/complaints/new'
       path: '/complaints/new'
@@ -123,11 +142,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedComplaintsIdRoute: typeof AuthenticatedComplaintsIdRoute
   AuthenticatedComplaintsNewRoute: typeof AuthenticatedComplaintsNewRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedComplaintsIdRoute: AuthenticatedComplaintsIdRoute,
   AuthenticatedComplaintsNewRoute: AuthenticatedComplaintsNewRoute,
 }
 
