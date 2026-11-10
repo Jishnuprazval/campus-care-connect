@@ -10,7 +10,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
       { title: "Dashboard — Campus Complaint Tracker" },
       { name: "description", content: "Your complaints, assigned work or campus-wide overview." },
       { property: "og:title", content: "Dashboard — Campus Complaint Tracker" },
-      { property: "og:description", content: "Your complaints, assigned work or campus-wide overview." },
+      {
+        property: "og:description",
+        content: "Your complaints, assigned work or campus-wide overview.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

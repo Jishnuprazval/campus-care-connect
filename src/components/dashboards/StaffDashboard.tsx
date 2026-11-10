@@ -23,10 +23,38 @@ export function StaffDashboard({ user }: { user: CurrentUser }) {
       />
 
       <div className="mb-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatCard label="Open workload" value={open} icon={Briefcase} tone="primary" onClick={() => setStatus("all")} active={status === "all"} hint={`${toStart} waiting to start`} />
-        <StatCard label="In progress" value={count("in_progress")} icon={Loader} onClick={() => setStatus("in_progress")} active={status === "in_progress"} />
-        <StatCard label="Awaiting student" value={count("needs_info")} icon={HelpCircle} tone="warning" onClick={() => setStatus("needs_info")} active={status === "needs_info"} />
-        <StatCard label="Resolved" value={count("resolved")} icon={CheckCircle2} tone="accent" onClick={() => setStatus("resolved")} active={status === "resolved"} />
+        <StatCard
+          label="Open workload"
+          value={open}
+          icon={Briefcase}
+          tone="primary"
+          onClick={() => setStatus("all")}
+          active={status === "all"}
+          hint={`${toStart} waiting to start`}
+        />
+        <StatCard
+          label="In progress"
+          value={count("in_progress")}
+          icon={Loader}
+          onClick={() => setStatus("in_progress")}
+          active={status === "in_progress"}
+        />
+        <StatCard
+          label="Awaiting student"
+          value={count("needs_info")}
+          icon={HelpCircle}
+          tone="warning"
+          onClick={() => setStatus("needs_info")}
+          active={status === "needs_info"}
+        />
+        <StatCard
+          label="Resolved"
+          value={count("resolved")}
+          icon={CheckCircle2}
+          tone="accent"
+          onClick={() => setStatus("resolved")}
+          active={status === "resolved"}
+        />
       </div>
 
       {q.isError ? (

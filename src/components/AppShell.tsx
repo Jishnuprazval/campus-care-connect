@@ -33,7 +33,9 @@ export function AppShell() {
           </nav>
           <div className="flex items-center gap-3">
             <div className="hidden text-right sm:block">
-              <p className="max-w-[180px] truncate text-sm font-semibold text-foreground">{user.fullName}</p>
+              <p className="max-w-[180px] truncate text-sm font-semibold text-foreground">
+                {user.fullName}
+              </p>
               <p className="text-xs text-muted-foreground">{ROLE_LABEL[user.role]}</p>
             </div>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
@@ -43,7 +45,10 @@ export function AppShell() {
             </Button>
           </div>
         </div>
-        <nav aria-label="Main mobile" className="flex gap-1 overflow-x-auto border-t px-3 py-2 md:hidden">
+        <nav
+          aria-label="Main mobile"
+          className="flex gap-1 overflow-x-auto border-t px-3 py-2 md:hidden"
+        >
           <NavItems role={user.role} />
         </nav>
       </header>

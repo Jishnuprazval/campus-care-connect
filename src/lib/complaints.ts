@@ -99,18 +99,20 @@ export const signInSchema = z.object({
 });
 
 export type FormErrors = {
-  [K in
-    | "form"
-    | "title"
-    | "description"
-    | "categoryId"
-    | "location"
-    | "roomNumber"
-    | "image"
-    | "email"
-    | "password"
-    | "fullName"
-    | "name"]?: string | undefined;
+  [
+    K in
+      | "form"
+      | "title"
+      | "description"
+      | "categoryId"
+      | "location"
+      | "roomNumber"
+      | "image"
+      | "email"
+      | "password"
+      | "fullName"
+      | "name"
+  ]?: string | undefined;
 };
 
 export function fieldErrors(error: z.ZodError): FormErrors {

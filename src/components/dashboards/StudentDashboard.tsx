@@ -3,7 +3,13 @@ import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { CheckCircle2, ClipboardList, HelpCircle, Plus, Timer } from "lucide-react";
 import { complaintsQuery, type CurrentUser } from "@/lib/queries";
-import { friendlyError, OPEN_STATUSES, STATUS_META, STATUS_ORDER, type ComplaintStatus } from "@/lib/complaints";
+import {
+  friendlyError,
+  OPEN_STATUSES,
+  STATUS_META,
+  STATUS_ORDER,
+  type ComplaintStatus,
+} from "@/lib/complaints";
 import { Button } from "@/components/ui/button";
 import { ComplaintList } from "@/components/ComplaintList";
 import { ErrorState, PageHeader, StatCard } from "@/components/common";
@@ -35,10 +41,31 @@ export function StudentDashboard({ user }: { user: CurrentUser }) {
       />
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatCard label="Total complaints" value={items.length} icon={ClipboardList} tone="primary" onClick={() => setStatus("all")} active={status === "all"} />
+        <StatCard
+          label="Total complaints"
+          value={items.length}
+          icon={ClipboardList}
+          tone="primary"
+          onClick={() => setStatus("all")}
+          active={status === "all"}
+        />
         <StatCard label="Open" value={open} icon={Timer} hint="Not yet resolved" />
-        <StatCard label="Needs your input" value={count("needs_info")} icon={HelpCircle} tone="warning" onClick={() => setStatus("needs_info")} active={status === "needs_info"} />
-        <StatCard label="Resolved" value={count("resolved")} icon={CheckCircle2} tone="accent" onClick={() => setStatus("resolved")} active={status === "resolved"} />
+        <StatCard
+          label="Needs your input"
+          value={count("needs_info")}
+          icon={HelpCircle}
+          tone="warning"
+          onClick={() => setStatus("needs_info")}
+          active={status === "needs_info"}
+        />
+        <StatCard
+          label="Resolved"
+          value={count("resolved")}
+          icon={CheckCircle2}
+          tone="accent"
+          onClick={() => setStatus("resolved")}
+          active={status === "resolved"}
+        />
       </div>
 
       <div className="mt-4 mb-8 flex flex-wrap gap-2" aria-label="Counts by status">

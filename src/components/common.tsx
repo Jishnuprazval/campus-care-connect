@@ -19,7 +19,9 @@ export function PageHeader({
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         {eyebrow && (
-          <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">{eyebrow}</p>
+          <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+            {eyebrow}
+          </p>
         )}
         <h1 className="mt-1 text-3xl font-semibold text-foreground sm:text-4xl">{title}</h1>
         {description && <p className="mt-2 max-w-2xl text-muted-foreground">{description}</p>}
@@ -66,7 +68,9 @@ export function StatCard({
     >
       <div>
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
-        <p className="mt-2 font-display text-3xl font-semibold text-foreground tabular-nums">{value}</p>
+        <p className="mt-2 font-display text-3xl font-semibold text-foreground tabular-nums">
+          {value}
+        </p>
         {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
       </div>
       <span className={cn("grid h-10 w-10 place-items-center rounded-lg", toneClass)}>
@@ -101,7 +105,10 @@ export function EmptyState({
 
 export function ErrorState({ message, onRetry }: { message: string; onRetry?: () => void }) {
   return (
-    <div role="alert" className="flex flex-col items-center rounded-xl border border-destructive/30 bg-destructive/5 px-6 py-10 text-center">
+    <div
+      role="alert"
+      className="flex flex-col items-center rounded-xl border border-destructive/30 bg-destructive/5 px-6 py-10 text-center"
+    >
       <AlertTriangle className="h-6 w-6 text-destructive" aria-hidden="true" />
       <p className="mt-3 font-semibold text-foreground">We couldn't load this</p>
       <p className="mt-1 text-sm text-muted-foreground">{message}</p>

@@ -88,7 +88,9 @@ export const complaintUpdatesQuery = (id: string) =>
     queryFn: async () => {
       const { data, error } = await supabase
         .from("complaint_updates")
-        .select("id, kind, body, from_status, to_status, assigned_to_name, author_name, author_role, created_at")
+        .select(
+          "id, kind, body, from_status, to_status, assigned_to_name, author_name, author_role, created_at",
+        )
         .eq("complaint_id", id)
         .order("created_at", { ascending: true });
       if (error) throw error;

@@ -6,7 +6,13 @@ import { ArrowLeft, CheckCircle2, ImagePlus, Loader2, Trash2 } from "lucide-reac
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { categoriesQuery } from "@/lib/queries";
-import { complaintSchema, fieldErrors, friendlyError, validateImage , type FormErrors } from "@/lib/complaints";
+import {
+  complaintSchema,
+  fieldErrors,
+  friendlyError,
+  validateImage,
+  type FormErrors,
+} from "@/lib/complaints";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,9 +31,15 @@ export const Route = createFileRoute("/_authenticated/complaints/new")({
   head: () => ({
     meta: [
       { title: "Report an issue — Campus Complaint Tracker" },
-      { name: "description", content: "Submit a new campus complaint with location details and an optional photo." },
+      {
+        name: "description",
+        content: "Submit a new campus complaint with location details and an optional photo.",
+      },
       { property: "og:title", content: "Report an issue — Campus Complaint Tracker" },
-      { property: "og:description", content: "Submit a new campus complaint with location details and an optional photo." },
+      {
+        property: "og:description",
+        content: "Submit a new campus complaint with location details and an optional photo.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -65,7 +77,11 @@ function NewComplaintPage() {
       <EmptyState
         title="Only students submit complaints"
         description="Staff and admin accounts manage complaints from the dashboard."
-        action={<Button asChild variant="outline"><Link to="/dashboard">Go to dashboard</Link></Button>}
+        action={
+          <Button asChild variant="outline">
+            <Link to="/dashboard">Go to dashboard</Link>
+          </Button>
+        }
       />
     );
   }
@@ -138,13 +154,20 @@ function NewComplaintPage() {
             <CheckCircle2 className="h-7 w-7" aria-hidden="true" />
           </span>
           <h1 className="mt-5 text-3xl font-semibold">Complaint submitted</h1>
-          <p className="mt-2 text-muted-foreground">Keep this tracking number to follow its progress.</p>
-          <p className="mt-6 rounded-xl border-2 border-dashed border-primary/40 bg-secondary px-4 py-4 font-mono text-2xl font-semibold tracking-wider text-primary" aria-label="Tracking number">
+          <p className="mt-2 text-muted-foreground">
+            Keep this tracking number to follow its progress.
+          </p>
+          <p
+            className="mt-6 rounded-xl border-2 border-dashed border-primary/40 bg-secondary px-4 py-4 font-mono text-2xl font-semibold tracking-wider text-primary"
+            aria-label="Tracking number"
+          >
             {created.tracking}
           </p>
           <div className="mt-8 flex flex-col justify-center gap-2 sm:flex-row">
             <Button asChild>
-              <Link to="/complaints/$id" params={{ id: created.id }}>View complaint</Link>
+              <Link to="/complaints/$id" params={{ id: created.id }}>
+                View complaint
+              </Link>
             </Button>
             <Button
               variant="outline"
@@ -166,44 +189,99 @@ function NewComplaintPage() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <Link to="/dashboard" className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+      <Link
+        to="/dashboard"
+        className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+      >
         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to dashboard
       </Link>
-      <PageHeader eyebrow="New complaint" title="Report an issue" description="Tell us what's wrong and where. Fields marked * are required." />
+      <PageHeader
+        eyebrow="New complaint"
+        title="Report an issue"
+        description="Tell us what's wrong and where. Fields marked * are required."
+      />
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-6 rounded-2xl border bg-card p-5 shadow-card sm:p-8">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="space-y-6 rounded-2xl border bg-card p-5 shadow-card sm:p-8"
+      >
         {formError && (
           <Alert variant="destructive" role="alert">
             <AlertDescription>{formError}</AlertDescription>
           </Alert>
         )}
 
-        <Field id="title" label="Title *" error={errors.title} hint="A short summary, e.g. “Projector not working in SR-3”">
-          <Input id="title" value={form.title} maxLength={120} onChange={(e) => set("title")(e.target.value)} aria-invalid={!!errors.title} />
+        <Field
+          id="title"
+          label="Title *"
+          error={errors.title}
+          hint="A short summary, e.g. “Projector not working in SR-3”"
+        >
+          <Input
+            id="title"
+            value={form.title}
+            maxLength={120}
+            onChange={(e) => set("title")(e.target.value)}
+            aria-invalid={!!errors.title}
+          />
         </Field>
 
-        <Field id="description" label="Description *" error={errors.description} hint={`${form.description.length}/4000`}>
-          <Textarea id="description" rows={6} value={form.description} maxLength={4000} onChange={(e) => set("description")(e.target.value)} aria-invalid={!!errors.description} placeholder="What happened, since when, and how it affects you." />
+        <Field
+          id="description"
+          label="Description *"
+          error={errors.description}
+          hint={`${form.description.length}/4000`}
+        >
+          <Textarea
+            id="description"
+            rows={6}
+            value={form.description}
+            maxLength={4000}
+            onChange={(e) => set("description")(e.target.value)}
+            aria-invalid={!!errors.description}
+            placeholder="What happened, since when, and how it affects you."
+          />
         </Field>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field id="category" label="Category *" error={errors.categoryId}>
-            <Select value={form.categoryId} onValueChange={set("categoryId")} disabled={cats.isLoading}>
+            <Select
+              value={form.categoryId}
+              onValueChange={set("categoryId")}
+              disabled={cats.isLoading}
+            >
               <SelectTrigger id="category" aria-invalid={!!errors.categoryId} className="w-full">
                 <SelectValue placeholder={cats.isLoading ? "Loading…" : "Choose a category"} />
               </SelectTrigger>
               <SelectContent>
                 {activeCats.map((c) => (
-                  <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </Field>
           <Field id="location" label="Building / location *" error={errors.location}>
-            <Input id="location" value={form.location} maxLength={120} onChange={(e) => set("location")(e.target.value)} aria-invalid={!!errors.location} placeholder="e.g. Central Library" />
+            <Input
+              id="location"
+              value={form.location}
+              maxLength={120}
+              onChange={(e) => set("location")(e.target.value)}
+              aria-invalid={!!errors.location}
+              placeholder="e.g. Central Library"
+            />
           </Field>
           <Field id="room" label="Room number" error={errors.roomNumber} hint="Optional">
-            <Input id="room" value={form.roomNumber} maxLength={30} onChange={(e) => set("roomNumber")(e.target.value)} aria-invalid={!!errors.roomNumber} placeholder="e.g. A-104" />
+            <Input
+              id="room"
+              value={form.roomNumber}
+              maxLength={30}
+              onChange={(e) => set("roomNumber")(e.target.value)}
+              aria-invalid={!!errors.roomNumber}
+              placeholder="e.g. A-104"
+            />
           </Field>
         </div>
 
@@ -211,17 +289,35 @@ function NewComplaintPage() {
           <Label htmlFor="photo">Photo</Label>
           {preview ? (
             <div className="flex items-start gap-4 rounded-xl border p-3">
-              <img src={preview} alt="Selected photo preview" className="h-24 w-32 rounded-lg object-cover" />
+              <img
+                src={preview}
+                alt="Selected photo preview"
+                className="h-24 w-32 rounded-lg object-cover"
+              />
               <div className="min-w-0 flex-1 text-sm">
                 <p className="truncate font-medium">{file?.name}</p>
-                <p className="text-muted-foreground">{((file?.size ?? 0) / 1024 / 1024).toFixed(2)} MB</p>
-                <Button type="button" variant="ghost" size="sm" className="mt-1 -ml-2" onClick={() => { setFile(null); if (fileRef.current) fileRef.current.value = ""; }}>
+                <p className="text-muted-foreground">
+                  {((file?.size ?? 0) / 1024 / 1024).toFixed(2)} MB
+                </p>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="mt-1 -ml-2"
+                  onClick={() => {
+                    setFile(null);
+                    if (fileRef.current) fileRef.current.value = "";
+                  }}
+                >
                   <Trash2 className="h-4 w-4" aria-hidden="true" /> Remove
                 </Button>
               </div>
             </div>
           ) : (
-            <label htmlFor="photo" className="flex cursor-pointer flex-col items-center rounded-xl border-2 border-dashed px-4 py-8 text-center transition hover:border-primary/50 hover:bg-secondary/50 focus-within:outline-2 focus-within:outline-ring">
+            <label
+              htmlFor="photo"
+              className="flex cursor-pointer flex-col items-center rounded-xl border-2 border-dashed px-4 py-8 text-center transition hover:border-primary/50 hover:bg-secondary/50 focus-within:outline-2 focus-within:outline-ring"
+            >
               <ImagePlus className="h-6 w-6 text-muted-foreground" aria-hidden="true" />
               <span className="mt-2 text-sm font-medium">Add a photo (optional)</span>
               <span className="text-xs text-muted-foreground">JPG, PNG or WebP · up to 5 MB</span>
@@ -235,11 +331,17 @@ function NewComplaintPage() {
             className="sr-only"
             onChange={(e) => pickFile(e.target.files?.[0])}
           />
-          {errors.image && <p className="text-sm text-destructive" role="alert">{errors.image}</p>}
+          {errors.image && (
+            <p className="text-sm text-destructive" role="alert">
+              {errors.image}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col-reverse gap-2 border-t pt-6 sm:flex-row sm:justify-end">
-          <Button asChild variant="ghost"><Link to="/dashboard">Cancel</Link></Button>
+          <Button asChild variant="ghost">
+            <Link to="/dashboard">Cancel</Link>
+          </Button>
           <Button type="submit" size="lg" disabled={busy}>
             {busy && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
             Submit complaint
@@ -250,12 +352,30 @@ function NewComplaintPage() {
   );
 }
 
-function Field({ id, label, error, hint, children }: { id: string; label: string; error?: string | undefined; hint?: string | undefined; children: React.ReactNode }) {
+function Field({
+  id,
+  label,
+  error,
+  hint,
+  children,
+}: {
+  id: string;
+  label: string;
+  error?: string | undefined;
+  hint?: string | undefined;
+  children: React.ReactNode;
+}) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id}>{label}</Label>
       {children}
-      {error ? <p className="text-sm text-destructive" role="alert">{error}</p> : hint ? <p className="text-xs text-muted-foreground">{hint}</p> : null}
+      {error ? (
+        <p className="text-sm text-destructive" role="alert">
+          {error}
+        </p>
+      ) : hint ? (
+        <p className="text-xs text-muted-foreground">{hint}</p>
+      ) : null}
     </div>
   );
 }

@@ -39,11 +39,19 @@ function Landing() {
       <header className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6">
         <BrandMark />
         {signedIn ? (
-          <Button asChild><Link to="/dashboard">Go to dashboard</Link></Button>
+          <Button asChild>
+            <Link to="/dashboard">Go to dashboard</Link>
+          </Button>
         ) : (
           <div className="flex items-center gap-2">
-            <Button asChild variant="ghost"><Link to="/auth">Sign in</Link></Button>
-            <Button asChild className="hidden sm:inline-flex"><Link to="/auth" search={{ mode: "signup" }}>Register</Link></Button>
+            <Button asChild variant="ghost">
+              <Link to="/auth">Sign in</Link>
+            </Button>
+            <Button asChild className="hidden sm:inline-flex">
+              <Link to="/auth" search={{ mode: "signup" }}>
+                Register
+              </Link>
+            </Button>
           </div>
         )}
       </header>
@@ -61,8 +69,9 @@ function Landing() {
               <span className="text-primary">Watch it get fixed.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              Flickering lights, leaking taps, dead Wi-Fi zones — log any campus issue with its exact
-              location and a photo. Every update from staff shows up on your tracking timeline.
+              Flickering lights, leaking taps, dead Wi-Fi zones — log any campus issue with its
+              exact location and a photo. Every update from staff shows up on your tracking
+              timeline.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
@@ -77,7 +86,9 @@ function Landing() {
                 )}
               </Button>
               {!signedIn && (
-                <Button asChild size="lg" variant="outline"><Link to="/auth">I already have an account</Link></Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/auth">I already have an account</Link>
+                </Button>
               )}
             </div>
           </div>
@@ -90,9 +101,21 @@ function Landing() {
         <h2 className="text-3xl font-semibold">How it works</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            { icon: Camera, title: "1. Report", body: "Pick a category, add the building and room, attach a photo. You get a tracking number instantly." },
-            { icon: ClipboardCheck, title: "2. Assigned", body: "An admin routes it to the right staff member, who updates the status as work progresses." },
-            { icon: MessageSquare, title: "3. Resolved", body: "Reply when staff need details. If the problem comes back, reopen it with one click." },
+            {
+              icon: Camera,
+              title: "1. Report",
+              body: "Pick a category, add the building and room, attach a photo. You get a tracking number instantly.",
+            },
+            {
+              icon: ClipboardCheck,
+              title: "2. Assigned",
+              body: "An admin routes it to the right staff member, who updates the status as work progresses.",
+            },
+            {
+              icon: MessageSquare,
+              title: "3. Resolved",
+              body: "Reply when staff need details. If the problem comes back, reopen it with one click.",
+            },
           ].map((s) => (
             <div key={s.title} className="rounded-2xl border bg-card p-6 shadow-card">
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
@@ -108,7 +131,9 @@ function Landing() {
       <section className="border-y bg-card">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <h2 className="text-3xl font-semibold">Every status, at a glance</h2>
-          <p className="mt-2 text-muted-foreground">Clear labels with icons so you always know where things stand.</p>
+          <p className="mt-2 text-muted-foreground">
+            Clear labels with icons so you always know where things stand.
+          </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {STATUS_ORDER.map((s) => (
               <li key={s} className="rounded-xl border bg-background p-4">
@@ -138,8 +163,12 @@ function TicketMock() {
         </div>
         <p className="mt-4 font-display text-2xl font-semibold">Wi-Fi drops on library 2F</p>
         <div className="mt-3 flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5"><Tag className="h-3.5 w-3.5" /> Wi-Fi/IT</span>
-          <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> Central Library</span>
+          <span className="inline-flex items-center gap-1.5">
+            <Tag className="h-3.5 w-3.5" /> Wi-Fi/IT
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="h-3.5 w-3.5" /> Central Library
+          </span>
         </div>
         <ol className="mt-6 space-y-4 border-l pl-5 text-sm">
           <li className="relative">

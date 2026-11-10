@@ -52,8 +52,19 @@ export function AssignControl({
         onValueChange={(v) => v !== currentAssignee && m.mutate(v)}
         disabled={m.isPending || staff.length === 0}
       >
-        <SelectTrigger className="w-full min-w-[190px]" aria-label={currentAssignee ? "Reassign complaint" : "Assign complaint"}>
-          <SelectValue placeholder={staff.length === 0 ? "No staff accounts" : m.isPending ? "Assigning…" : "Assign to staff…"} />
+        <SelectTrigger
+          className="w-full min-w-[190px]"
+          aria-label={currentAssignee ? "Reassign complaint" : "Assign complaint"}
+        >
+          <SelectValue
+            placeholder={
+              staff.length === 0
+                ? "No staff accounts"
+                : m.isPending
+                  ? "Assigning…"
+                  : "Assign to staff…"
+            }
+          />
         </SelectTrigger>
         <SelectContent>
           {staff.map((s) => (

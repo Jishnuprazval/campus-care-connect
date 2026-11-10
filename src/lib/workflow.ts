@@ -37,7 +37,9 @@ export function noteRequired(target: ComplaintStatus): boolean {
 }
 
 export function canComment(viewer: Viewer): boolean {
-  return viewer.isOwner || viewer.role === "admin" || (viewer.role === "staff" && viewer.isAssigned);
+  return (
+    viewer.isOwner || viewer.role === "admin" || (viewer.role === "staff" && viewer.isAssigned)
+  );
 }
 
 export function canEditDetails(viewer: Viewer, current: ComplaintStatus): boolean {
