@@ -66,8 +66,8 @@
 
   --color-status-submitted: var(--status-submitted);
   --color-status-assigned: var(--status-assigned);
-  --color-status-in_progress: var(--status-in_progress);
-  --color-status-needs_info: var(--status-needs_info);
+  --color-status-in-progress: var(--status-in-progress);
+  --color-status-needs-info: var(--status-needs-info);
   --color-status-resolved: var(--status-resolved);
   --color-status-rejected: var(--status-rejected);
   --color-status-reopened: var(--status-reopened);
@@ -111,8 +111,8 @@
 
   --status-submitted: oklch(0.48 0.1 252);
   --status-assigned: oklch(0.47 0.08 200);
-  --status-in_progress: oklch(0.5 0.12 68);
-  --status-needs_info: oklch(0.52 0.16 42);
+  --status-in-progress: oklch(0.5 0.12 68);
+  --status-needs-info: oklch(0.52 0.16 42);
   --status-resolved: oklch(0.47 0.12 150);
   --status-rejected: oklch(0.5 0.19 25);
   --status-reopened: oklch(0.48 0.16 345);
@@ -161,8 +161,8 @@
 
   --status-submitted: oklch(0.76 0.1 252);
   --status-assigned: oklch(0.76 0.08 200);
-  --status-in_progress: oklch(0.8 0.12 75);
-  --status-needs_info: oklch(0.76 0.14 45);
+  --status-in-progress: oklch(0.8 0.12 75);
+  --status-needs-info: oklch(0.76 0.14 45);
   --status-resolved: oklch(0.76 0.13 150);
   --status-rejected: oklch(0.72 0.16 25);
   --status-reopened: oklch(0.75 0.14 345);

@@ -25,8 +25,8 @@ export const STATUS_ICON: Record<ComplaintStatus, LucideIcon> = {
 export const STATUS_CLASSES: Record<ComplaintStatus, string> = {
   submitted: "bg-status-submitted/10 text-status-submitted border-status-submitted/30",
   assigned: "bg-status-assigned/10 text-status-assigned border-status-assigned/30",
-  in_progress: "bg-status-in_progress/10 text-status-in_progress border-status-in_progress/30",
-  needs_info: "bg-status-needs_info/10 text-status-needs_info border-status-needs_info/30",
+  in_progress: "bg-status-in-progress/10 text-status-in-progress border-status-in-progress/30",
+  needs_info: "bg-status-needs-info/10 text-status-needs-info border-status-needs-info/30",
   resolved: "bg-status-resolved/10 text-status-resolved border-status-resolved/30",
   rejected: "bg-status-rejected/10 text-status-rejected border-status-rejected/30",
   reopened: "bg-status-reopened/10 text-status-reopened border-status-reopened/30",
@@ -35,8 +35,8 @@ export const STATUS_CLASSES: Record<ComplaintStatus, string> = {
 export const STATUS_DOT: Record<ComplaintStatus, string> = {
   submitted: "bg-status-submitted",
   assigned: "bg-status-assigned",
-  in_progress: "bg-status-in_progress",
-  needs_info: "bg-status-needs_info",
+  in_progress: "bg-status-in-progress",
+  needs_info: "bg-status-needs-info",
   resolved: "bg-status-resolved",
   rejected: "bg-status-rejected",
   reopened: "bg-status-reopened",
