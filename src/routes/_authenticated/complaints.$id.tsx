@@ -369,7 +369,7 @@ function ReplyBox({ c, viewer }: { c: ComplaintDetail; viewer: Viewer }) {
     e.preventDefault();
     const parsed = commentSchema.safeParse(body);
     if (!parsed.success) {
-      setError(parsed.error.issues[0].message);
+      setError(parsed.error.issues[0]?.message ?? "Write a message first");
       return;
     }
     setError(null);
@@ -422,7 +422,7 @@ function StatusCard({ c, targets }: { c: ComplaintDetail; targets: ComplaintStat
       const { error } = await supabase.rpc("change_complaint_status", {
         _complaint_id: c.id,
         _status: target as ComplaintStatus,
-        _note: note.trim() || undefined,
+        ...(note.trim() ? { _note: note.trim() } : {}),
       });
       if (error) throw error;
     },
@@ -594,7 +594,7 @@ function EditDialog({ c, onClose }: { c: ComplaintDetail; onClose: () => void })
     location: c.location,
     roomNumber: c.room_number ?? "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const m = useMutation({
     mutationFn: async (v: typeof form) => {
       const { error } = await supabase.rpc("edit_complaint", {
@@ -672,7 +672,7 @@ function EditDialog({ c, onClose }: { c: ComplaintDetail; onClose: () => void })
   );
 }
 
-function EF({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
+function EF({ id, label, error, children }: { id: string; label: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id}>{label}</Label>

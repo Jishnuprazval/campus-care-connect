@@ -41,7 +41,7 @@ export function StatCard({
   label: string;
   value: number | string;
   icon: LucideIcon;
-  hint?: string;
+  hint?: string | undefined;
   tone?: "default" | "primary" | "accent" | "warning";
   onClick?: () => void;
   active?: boolean;
@@ -84,7 +84,7 @@ export function EmptyState({
 }: {
   icon?: LucideIcon;
   title: string;
-  description?: string;
+  description?: string | undefined;
   action?: ReactNode;
 }) {
   return (

@@ -6,7 +6,7 @@ import { ArrowLeft, CheckCircle2, ImagePlus, Loader2, Trash2 } from "lucide-reac
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { categoriesQuery } from "@/lib/queries";
-import { complaintSchema, fieldErrors, friendlyError, validateImage } from "@/lib/complaints";
+import { complaintSchema, fieldErrors, friendlyError, validateImage , type FormErrors } from "@/lib/complaints";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -44,7 +44,7 @@ function NewComplaintPage() {
   const [form, setForm] = useState(EMPTY);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [created, setCreated] = useState<{ id: string; tracking: string } | null>(null);
@@ -250,7 +250,7 @@ function NewComplaintPage() {
   );
 }
 
-function Field({ id, label, error, hint, children }: { id: string; label: string; error?: string; hint?: string; children: React.ReactNode }) {
+function Field({ id, label, error, hint, children }: { id: string; label: string; error?: string | undefined; hint?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id}>{label}</Label>

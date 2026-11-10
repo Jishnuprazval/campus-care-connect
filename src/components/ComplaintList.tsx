@@ -28,7 +28,7 @@ type Props = {
   enableDateFilter?: boolean;
   enableAssigneeFilter?: boolean;
   renderAction?: (item: ComplaintListItem) => ReactNode;
-  empty: { title: string; description?: string; action?: ReactNode };
+  empty: { title: string; description?: string | undefined; action?: ReactNode };
 };
 
 export function ComplaintList({

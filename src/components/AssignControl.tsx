@@ -48,7 +48,7 @@ export function AssignControl({
   return (
     <div className={className}>
       <Select
-        value={currentAssignee ?? undefined}
+        value={currentAssignee ?? ""}
         onValueChange={(v) => v !== currentAssignee && m.mutate(v)}
         disabled={m.isPending || staff.length === 0}
       >

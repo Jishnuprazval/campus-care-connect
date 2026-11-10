@@ -98,13 +98,28 @@ export const signInSchema = z.object({
   password: z.string().min(1, "Enter your password"),
 });
 
-export function fieldErrors(error: z.ZodError): Record<string, string> {
+export type FormErrors = {
+  [K in
+    | "form"
+    | "title"
+    | "description"
+    | "categoryId"
+    | "location"
+    | "roomNumber"
+    | "image"
+    | "email"
+    | "password"
+    | "fullName"
+    | "name"]?: string | undefined;
+};
+
+export function fieldErrors(error: z.ZodError): FormErrors {
   const out: Record<string, string> = {};
   for (const issue of error.issues) {
     const key = String(issue.path[0] ?? "form");
     if (!out[key]) out[key] = issue.message;
   }
-  return out;
+  return out as FormErrors;
 }
 
 /** Turns backend errors into messages a person can act on. */

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { fieldErrors, signInSchema, signUpSchema } from "@/lib/complaints";
+import { fieldErrors, signInSchema, signUpSchema , type FormErrors } from "@/lib/complaints";
 
 type AuthSearch = { redirect?: string; mode?: "signin" | "signup" };
 
@@ -21,8 +21,8 @@ function safeRedirect(value: unknown): string | undefined {
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (search: Record<string, unknown>): AuthSearch => ({
-    redirect: safeRedirect(search.redirect),
-    mode: search.mode === "signup" ? "signup" : undefined,
+    redirect: safeRedirect(search["redirect"]),
+    mode: search["mode"] === "signup" ? "signup" : undefined,
   }),
   head: () => ({
     meta: [
@@ -52,7 +52,7 @@ function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [confirmSent, setConfirmSent] = useState<string | null>(null);
@@ -269,8 +269,8 @@ function Field({
 }: {
   id: string;
   label: string;
-  error?: string;
-  hint?: string;
+  error?: string | undefined;
+  hint?: string | undefined;
   children: React.ReactNode;
 }) {
   return (

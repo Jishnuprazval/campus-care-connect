@@ -7,7 +7,7 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { categoriesQuery } from "@/lib/queries";
-import { fieldErrors, friendlyError } from "@/lib/complaints";
+import { fieldErrors, friendlyError , type FormErrors } from "@/lib/complaints";
 import { EmptyState, ErrorState, ListSkeleton, PageHeader, RestrictedNotice } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,7 +67,7 @@ function CategoriesAdmin() {
   };
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [editing, setEditing] = useState<Cat | null>(null);
   const [deleting, setDeleting] = useState<Cat | null>(null);
 
@@ -205,7 +205,7 @@ function CategoriesAdmin() {
 function EditCategoryDialog({ cat, onClose, onSaved }: { cat: Cat; onClose: () => void; onSaved: () => void }) {
   const [name, setName] = useState(cat.name);
   const [description, setDescription] = useState(cat.description ?? "");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const m = useMutation({
     mutationFn: async (v: { name: string; description: string }) => {
       const { error } = await supabase.from("categories").update({ name: v.name, description: v.description || null, updated_at: new Date().toISOString() }).eq("id", cat.id);
