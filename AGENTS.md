@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Complaint workflow permissions live in Postgres security-definer functions (change_complaint_status, assign_complaint, add_complaint_comment, edit_complaint, set_user_role); clients have no UPDATE grant on complaints. Why: rules are enforced server-side regardless of UI.
+- src/lib/workflow.ts mirrors those rules for the UI only; keep it in sync with the database functions and its tests in src/test/workflow.test.ts.
+- Roles live only in public.user_roles (one row per user); new sign-ups always get "student" via the auth trigger. Why: prevents self-promotion.

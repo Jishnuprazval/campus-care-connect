@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794316294889,
+      "tag": "0000_campus_complaint_tracker_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794316883272,
+      "tag": "0001_admin_delete_complaint_photos",
+      "breakpoints": true
+    }
+  ]
+}
