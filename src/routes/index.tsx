@@ -66,9 +66,15 @@ function Landing() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
-                <Link to={signedIn ? "/dashboard" : "/auth"} search={signedIn ? undefined : { mode: "signup" }}>
-                  {signedIn ? "Open my dashboard" : "Create a student account"} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
+                {signedIn ? (
+                  <Link to="/dashboard">
+                    Open my dashboard <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <Link to="/auth" search={{ mode: "signup" }}>
+                    Create a student account <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                )}
               </Button>
               {!signedIn && (
                 <Button asChild size="lg" variant="outline"><Link to="/auth">I already have an account</Link></Button>
